@@ -5,10 +5,14 @@ function filterVideos() {
 
     videos.forEach(video => {
 
+        let badgeArea = video.querySelector("ytd-badge-support", "ytd-desktop-meta-block");
+
+        let allText = video.innerText + (badgeArea?.innerText || "").toLowerCase();
         //turn video into title text format
-        let title = video.innerText.toLowerCase();
+        let match = neededKeywords.some(keyword => allText.includes(keyword));
+
         //if the video doesn't contain any keywords then dont display it
-        if(!neededKeywords.some(keyword => title.includes(keyword))) {
+        if(!match) {
             video.style.display = "none";
         }
     });
