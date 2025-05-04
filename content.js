@@ -1,16 +1,19 @@
-var neededKeywords = ["Computer Science", "software", "cs"];
-
+var neededKeywords = ["computer science", "software", "cs"];
+const RELOAD_TIME = 2000;
 function filterVideos() {
-    const videos = document.getElementById("ytd-rich-item-renderer");
+    const videos = document.querySelectorAll("ytd-rich-item-renderer");
 
     videos.forEach(video => {
 
-        //turn title into text format
-        video = video.innerText.toLowerCase();
+        //turn video into title text format
+        let title = video.innerText.toLowerCase();
         //if the video doesn't contain any keywords then dont display it
-        if(!neededKeywords.some(keyword => video.includes(keyword))) {
-            
-            video.title.display = none;
+        if(!neededKeywords.some(keyword => title.includes(keyword))) {
+            video.style.display = "none";
         }
     });
 }
+
+
+
+setInterval(filterVideos, RELOAD_TIME);
